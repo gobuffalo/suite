@@ -15,7 +15,7 @@ import (
 )
 
 type ActionSuite struct {
-	*suite.Suite
+	*suite.Action
 }
 
 func Test_ActionSuite(t *testing.T) {
