@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/buffalo"
+	"github.com/gobuffalo/buffalo/middleware"
 	"github.com/markbates/willie"
 	"github.com/stretchr/testify/suite"
 )
@@ -12,6 +13,7 @@ type Action struct {
 	*Model
 	Willie *willie.Willie
 	App    *buffalo.App
+	csrf   buffalo.MiddlewareFunc
 }
 
 func NewAction(app *buffalo.App) *Action {
@@ -36,9 +38,16 @@ func (as *Action) JSON(u string, args ...interface{}) *willie.JSON {
 
 func (as *Action) SetupTest() {
 	as.Model.SetupTest()
+	as.csrf = middleware.CSRF
+	middleware.CSRF = func(next buffalo.Handler) buffalo.Handler {
+		return func(c buffalo.Context) error {
+			return next(c)
+		}
+	}
 	as.Willie = willie.New(as.App)
 }
 
 func (as *Action) TearDownTest() {
+	middleware.CSRF = as.csrf
 	as.Model.TearDownTest()
 }
