@@ -13,7 +13,7 @@ type aSuite struct {
 }
 
 func Test_aSuite(t *testing.T) {
-	app := buffalo.Automatic(buffalo.Options{})
+	app := buffalo.New(buffalo.Options{})
 	app.GET("/session-hello", func(c buffalo.Context) error {
 		if n, ok := c.Session().Get("name").(string); ok {
 			return c.Render(200, render.String(n))
