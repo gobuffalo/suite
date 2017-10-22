@@ -16,7 +16,8 @@ type Model struct {
 func (m *Model) SetupTest() {
 	m.Assertions = require.New(m.T())
 	if m.DB != nil {
-		m.DB.TruncateAll()
+		err := m.DB.TruncateAll()
+		m.NoError(err)
 	}
 }
 
