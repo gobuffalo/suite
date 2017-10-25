@@ -30,7 +30,7 @@ func Run(t *testing.T, s suite.TestingSuite) {
 }
 
 func (as *Action) HTML(u string, args ...interface{}) *willie.Request {
-	return as.Willie.Request(u, args...)
+	return as.Willie.HTML(u, args...)
 }
 
 func (as *Action) JSON(u string, args ...interface{}) *willie.JSON {
