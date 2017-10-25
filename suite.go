@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/buffalo/middleware"
+	"github.com/gobuffalo/buffalo/middleware/csrf"
 	"github.com/markbates/willie"
 	"github.com/stretchr/testify/suite"
 )
@@ -45,8 +45,8 @@ func (as *Action) SetupTest() {
 	}
 
 	as.Model.SetupTest()
-	as.csrf = middleware.CSRF
-	middleware.CSRF = func(next buffalo.Handler) buffalo.Handler {
+	as.csrf = csrf.New
+	csrf.New = func(next buffalo.Handler) buffalo.Handler {
 		return func(c buffalo.Context) error {
 			return next(c)
 		}
@@ -55,6 +55,6 @@ func (as *Action) SetupTest() {
 }
 
 func (as *Action) TearDownTest() {
-	middleware.CSRF = as.csrf
+	csrf.New = as.csrf
 	as.Model.TearDownTest()
 }
