@@ -23,6 +23,15 @@ func (m *Model) SetupTest() {
 
 func (m *Model) TearDownTest() {}
 
+func (m *Model) DBDelta(delta int, name string, fn func()) {
+	sc, err := m.DB.Count(name)
+	m.NoError(err)
+	fn()
+	ec, err := m.DB.Count(name)
+	m.NoError(err)
+	m.Equal(ec, sc+delta)
+}
+
 func NewModel() *Model {
 	m := &Model{}
 	c, err := pop.Connect(envy.Get("GO_ENV", "test"))
