@@ -2,7 +2,7 @@ package suite
 
 import (
 	"github.com/gobuffalo/envy"
-	"github.com/markbates/pop"
+	"github.com/gobuffalo/pop"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
