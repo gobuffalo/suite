@@ -9,7 +9,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-var scenes = sync.Map{}
+var scenes = map[string]Scenario{}
+var moot = &sync.RWMutex{}
 
 func Init(box packr.Box) error {
 	err := box.Walk(func(path string, file packr.File) error {
@@ -25,22 +26,22 @@ func Init(box packr.Box) error {
 			return errors.WithStack(err)
 		}
 
+		moot.Lock()
 		for _, s := range sc.Scenarios {
-			scenes.Store(s.Name, s)
+			scenes[s.Name] = s
 		}
+		moot.Unlock()
 		return nil
 	})
 	return err
 }
 
 func Find(name string) (Scenario, error) {
-	s, ok := scenes.Load(name)
+	moot.RLock()
+	s, ok := scenes[name]
+	moot.RUnlock()
 	if !ok {
 		return Scenario{}, errors.Errorf("could not find a scenario named %q", name)
 	}
-	sc, ok := s.(Scenario)
-	if !ok {
-		return Scenario{}, errors.Errorf("try to load %s but it isn't a Scenario it's a %T", s)
-	}
-	return sc, nil
+	return s, nil
 }
