@@ -36,7 +36,7 @@ func Init(box packr.Box) error {
 func Find(name string) (Scenario, error) {
 	s, ok := scenes.Load(name)
 	if !ok {
-		return Scenario{}, errors.Errorf("could not find a scenario named %s", s)
+		return Scenario{}, errors.Errorf("could not find a scenario named %q", name)
 	}
 	sc, ok := s.(Scenario)
 	if !ok {
