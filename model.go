@@ -44,7 +44,7 @@ func (as *Model) LoadFixture(name string) {
 	db := as.DB.Store
 
 	for _, table := range sc.Tables {
-		for _, row := range table.Data {
+		for _, row := range table.Row {
 			q := "insert into " + table.Name
 			keys := []string{}
 			skeys := []string{}

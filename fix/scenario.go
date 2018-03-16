@@ -12,7 +12,7 @@ type Scenarios struct {
 
 type Table struct {
 	Name string                   `toml:"name"`
-	Data []map[string]interface{} `toml:"data"`
+	Row  []map[string]interface{} `toml:"row"`
 }
 
 type Tables []Table

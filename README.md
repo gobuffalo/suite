@@ -142,14 +142,14 @@ name = "lots of widgets"
   [[scenario.table]]
     name = "widgets"
 
-    [[scenario.table.data]]
+    [[scenario.table.row]]
       id = "<%= uuidNamed("widget") %>"
       name = "This is widget #1"
       body = "some widget body"
       created_at = "<%= now() %>"
       updated_at = "<%= now() %>"
 
-    [[scenario.table.data]]
+    [[scenario.table.row]]
       id = "<%= uuid() %>"
       name = "This is widget #2"
       body = "some widget body"
@@ -159,7 +159,7 @@ name = "lots of widgets"
   [[scenario.table]]
     name = "users"
 
-    [[scenario.table.data]]
+    [[scenario.table.row]]
       id = "<%= uuid() %>"
       name = "Mark Bates"
       admin = true
