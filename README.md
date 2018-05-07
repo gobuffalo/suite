@@ -118,7 +118,7 @@ func (as *ActionSuite) Test_TodosResource_Update() {
 
 ## Fixtures (Test Data)
 
-Often it is useful to load a series of data into the database at the start of the test to make testing. For example, you need to have a user in the database to log a person into the application, or you need some data in the database to test destroying that data. Fixtures let us solve these problems easily.
+Often it is useful to load a series of data into the database at the start of the test to make testing easier. For example, you need to have a user in the database to log a person into the application, or you need some data in the database to test destroying that data. Fixtures let us solve these problems easily.
 
 ### Usage
 
