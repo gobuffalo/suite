@@ -4,7 +4,7 @@ require (
 	github.com/BurntSushi/toml v0.3.0
 	github.com/gobuffalo/buffalo v0.12.6
 	github.com/gobuffalo/envy v1.6.3
-	github.com/gobuffalo/packr v1.13.1
+	github.com/gobuffalo/packr v1.13.2
 	github.com/gobuffalo/plush v0.0.0-20180810170812-274552812256
 	github.com/gobuffalo/pop v0.0.0-20180810203029-9f8bf0c11920
 	github.com/gobuffalo/uuid v2.0.0+incompatible
