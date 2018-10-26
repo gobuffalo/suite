@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/buffalo/middleware/csrf"
+	"github.com/gobuffalo/mw-csrf"
 	"github.com/gobuffalo/packr"
 	"github.com/markbates/willie"
 	"github.com/pkg/errors"
