@@ -69,6 +69,8 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/mw-csrf](https://godoc.org/github.com/gobuffalo/mw-csrf)
 
+* [github.com/gobuffalo/packd](https://godoc.org/github.com/gobuffalo/packd)
+
 * [github.com/gobuffalo/packr](https://godoc.org/github.com/gobuffalo/packr)
 
 * [github.com/gobuffalo/plush](https://godoc.org/github.com/gobuffalo/plush)

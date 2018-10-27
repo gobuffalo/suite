@@ -1,3 +1,3 @@
 package suite
 
-const Version = "v2.1.7"
+const Version = "v2.2.0"
