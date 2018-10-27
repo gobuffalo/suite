@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gobuffalo/envy"
-	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/packd"
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/suite/fix"
 	"github.com/stretchr/testify/require"
@@ -16,7 +16,7 @@ type Model struct {
 	suite.Suite
 	*require.Assertions
 	DB       *pop.Connection
-	Fixtures packr.Box
+	Fixtures packd.Finder
 }
 
 func (m *Model) SetupTest() {
@@ -69,7 +69,12 @@ func NewModel() *Model {
 	return m
 }
 
-func NewModelWithFixtures(box packr.Box) (*Model, error) {
+type Box interface {
+	packd.Finder
+	packd.Walkable
+}
+
+func NewModelWithFixtures(box packd.Box) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
 	return m, fix.Init(box)
