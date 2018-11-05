@@ -18,6 +18,7 @@ type Action struct {
 	csrf    buffalo.MiddlewareFunc
 }
 
+// NewAction returns new Action for given buffalo.App
 func NewAction(app *buffalo.App) *Action {
 	as := &Action{
 		App:   app,
