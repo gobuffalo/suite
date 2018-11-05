@@ -67,6 +67,8 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/github_flavored_markdown/internal/shurcooL/sanitized_anchor_name](https://godoc.org/github.com/gobuffalo/github_flavored_markdown/internal/shurcooL/sanitized_anchor_name)
 
+* [github.com/gobuffalo/httptest](https://godoc.org/github.com/gobuffalo/httptest)
+
 * [github.com/gobuffalo/logger](https://godoc.org/github.com/gobuffalo/logger)
 
 * [github.com/gobuffalo/makr](https://godoc.org/github.com/gobuffalo/makr)
@@ -180,8 +182,6 @@ Thank you to the following **GIANTS**:
 * [github.com/markbates/safe](https://godoc.org/github.com/markbates/safe)
 
 * [github.com/markbates/sigtx](https://godoc.org/github.com/markbates/sigtx)
-
-* [github.com/markbates/willie](https://godoc.org/github.com/markbates/willie)
 
 * [github.com/mattn/go-colorable](https://godoc.org/github.com/mattn/go-colorable)
 
