@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/buffalo"
+	"github.com/gobuffalo/httptest"
 	"github.com/gobuffalo/mw-csrf"
 	"github.com/gobuffalo/packr"
-	"github.com/markbates/willie"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/suite"
 )
@@ -14,11 +14,11 @@ import (
 type Action struct {
 	*Model
 	Session *buffalo.Session
-	Willie  *willie.Willie
 	App     *buffalo.App
 	csrf    buffalo.MiddlewareFunc
 }
 
+// NewAction returns new Action for given buffalo.App
 func NewAction(app *buffalo.App) *Action {
 	as := &Action{
 		App:   app,
@@ -43,12 +43,12 @@ func Run(t *testing.T, s suite.TestingSuite) {
 	suite.Run(t, s)
 }
 
-func (as *Action) HTML(u string, args ...interface{}) *willie.Request {
-	return as.Willie.HTML(u, args...)
+func (as *Action) HTML(u string, args ...interface{}) *httptest.Request {
+	return httptest.New(as.App).HTML(u, args...)
 }
 
-func (as *Action) JSON(u string, args ...interface{}) *willie.JSON {
-	return as.Willie.JSON(u, args...)
+func (as *Action) JSON(u string, args ...interface{}) *httptest.JSON {
+	return httptest.New(as.App).JSON(u, args...)
 }
 
 func (as *Action) SetupTest() {
@@ -65,7 +65,6 @@ func (as *Action) SetupTest() {
 			return next(c)
 		}
 	}
-	as.Willie = willie.New(as.App)
 }
 
 func (as *Action) TearDownTest() {
