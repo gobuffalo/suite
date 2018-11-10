@@ -29,9 +29,11 @@ test:
 	$(GO_BIN) test -tags ${TAGS} ./...
 	make tidy
 
+ci-deps:
+	$(GO_BIN) get -tags ${TAGS} -t ./...
+
 ci-test:
 	$(GO_BIN) test -tags ${TAGS} -race ./...
-	make tidy
 
 lint:
 	gometalinter --vendor ./... --deadline=1m --skip=internal
