@@ -11,12 +11,13 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func render(file packr.File, config PlushConfig) (string, error) {
+func renderWithContext(file packr.File, ctx *plush.Context ) (string, error) {
 	b, err := ioutil.ReadAll(file)
 	if err != nil {
 		return "", errors.WithStack(err)
 	}
-	c := plush.NewContextWith(map[string]interface{}{
+
+	cm := map[string]interface{}{
 		"uuid": func() uuid.UUID {
 			u, _ := uuid.NewV4()
 			return u
@@ -24,21 +25,33 @@ func render(file packr.File, config PlushConfig) (string, error) {
 		"uuidNamed": uuidNamed,
 		"now":       time.Now,
 		"hash":      hash,
-	})
-	applyPlushConfig(config, c)
-
-
-	return plush.Render(string(b), c)
+	}
+	for k, v := range cm {
+		if !ctx.Has(k) {
+			ctx.Set(k,v)
+		}
+	}
+	return plush.Render(string(b), ctx)
 }
-type PlushConfig struct {
-	TimeFormat string
-}
-func applyPlushConfig(config PlushConfig, context *plush.Context){
-	if(config.TimeFormat != ""){
-		context.Set("TIME_FORMAT", config.TimeFormat)
+
+func render(file packr.File) (string, error) {
+	b, err := ioutil.ReadAll(file)
+	if err != nil {
+		return "", errors.WithStack(err)
 	}
 
+
+	return plush.Render(string(b), plush.NewContextWith(map[string]interface{}{
+		"uuid": func() uuid.UUID {
+			u, _ := uuid.NewV4()
+			return u
+		},
+		"uuidNamed": uuidNamed,
+		"now":       time.Now,
+		"hash":      hash,
+	}))
 }
+
 
 func hash(s string, opts map[string]interface{}, help plush.HelperContext) (string, error) {
 	cost := bcrypt.DefaultCost

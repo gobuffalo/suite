@@ -1,18 +1,18 @@
 package fix
 
 import (
-	"testing"
-
 	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/plush"
 	"github.com/stretchr/testify/require"
+	"testing"
+	"time"
 )
 
 func Test_Init_And_Find(t *testing.T) {
 	r := require.New(t)
 
 	box := packr.NewBox("./init-fixtures")
-	c := PlushConfig{}
-	r.NoError(Init(box,  c))
+	r.NoError(Init(box))
 
 	s, err := Find("lots of widgets")
 	r.NoError(err)
@@ -53,12 +53,15 @@ func Test_Init_And_Find(t *testing.T) {
 	r.Equal(wid, row["widget_id"])
 }
 
-func Test_Init_And_Find_CustomConfig(t *testing.T) {
+func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 	r := require.New(t)
 
 	box := packr.NewBox("./init-fixtures")
-	c := PlushConfig{TimeFormat: "2012-11-01T22:08:41+00:00"}
-	r.NoError(Init(box,  c))
+	ctx := plush.NewContextWith(map[string]interface{}{
+		"TIME_FORMAT": time.RFC3339,
+		//"TIME_FORMAT": "2012-11-01T22:08:41+00:00",
+	})
+	r.NoError(InitWithContext(box, ctx))
 
 	s, err := Find("lots of widgets")
 	r.NoError(err)
