@@ -83,5 +83,5 @@ func NewModelWithFixturesAndConfig(box packd.Box, config fix.PlushConfig) (*Mode
 func NewModelWithFixtures(box packd.Box) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
-	return m, fix.Init(box)
+	return m, fix.Init(box, fix.PlushConfig{})
 }
