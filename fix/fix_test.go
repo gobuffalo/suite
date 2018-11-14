@@ -57,12 +57,15 @@ func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 
 	box := packr.NewBox("./init-fixtures")
 	ctx := plush.NewContextWith(map[string]interface{}{
+		"double": func (num int, help plush.HelperContext) int{
+			return  num * 2
+		},
 	})
 	r.NoError(InitWithContext(box, ctx))
 
-	s, err := Find("lots of widgets")
+	s, err := Find("widget with context")
 	r.NoError(err)
-	r.Equal("lots of widgets", s.Name)
+	r.Equal("widget with context", s.Name)
 
 	r.Len(s.Tables, 2)
 
@@ -95,7 +98,7 @@ func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 	r.NotZero(row["created_at"])
 	r.NotZero(row["updated_at"])
 	r.True(row["admin"].(bool))
-	r.Equal(19.99, row["price"].(float64))
+	r.Equal(int64(36), row["price"].(int64))
 	r.Equal(wid, row["widget_id"])
 }
 
