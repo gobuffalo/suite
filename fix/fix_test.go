@@ -5,7 +5,6 @@ import (
 	"github.com/gobuffalo/plush"
 	"github.com/stretchr/testify/require"
 	"testing"
-	"time"
 )
 
 func Test_Init_And_Find(t *testing.T) {
@@ -58,8 +57,6 @@ func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 
 	box := packr.NewBox("./init-fixtures")
 	ctx := plush.NewContextWith(map[string]interface{}{
-		"TIME_FORMAT": time.RFC3339,
-		//"TIME_FORMAT": "2012-11-01T22:08:41+00:00",
 	})
 	r.NoError(InitWithContext(box, ctx))
 

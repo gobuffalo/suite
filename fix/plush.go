@@ -23,7 +23,7 @@ func renderWithContext(file packr.File, ctx *plush.Context ) (string, error) {
 			return u
 		},
 		"uuidNamed": uuidNamed,
-		"now":       time.Now,
+		"now":       now,
 		"hash":      hash,
 	}
 	for k, v := range cm {
@@ -47,7 +47,7 @@ func render(file packr.File) (string, error) {
 			return u
 		},
 		"uuidNamed": uuidNamed,
-		"now":       time.Now,
+		"now":       now,
 		"hash":      hash,
 	}))
 }
@@ -61,7 +61,9 @@ func hash(s string, opts map[string]interface{}, help plush.HelperContext) (stri
 	ph, err := bcrypt.GenerateFromPassword([]byte(s), cost)
 	return string(ph), err
 }
-
+func now( help plush.HelperContext) string {
+	return time.Now().Format(time.RFC3339)
+}
 func uuidNamed(name string, help plush.HelperContext) uuid.UUID {
 	u, _ := uuid.NewV4()
 	if ux, ok := help.Value(name).(uuid.UUID); ok {
