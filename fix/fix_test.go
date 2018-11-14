@@ -55,7 +55,7 @@ func Test_Init_And_Find(t *testing.T) {
 func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 	r := require.New(t)
 
-	box := packr.NewBox("./init-fixtures")
+	box := packr.NewBox("./init-context-fixtures")
 	ctx := plush.NewContextWith(map[string]interface{}{
 		"double": func (num int, help plush.HelperContext) int{
 			return  num * 2
