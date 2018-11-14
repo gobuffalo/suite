@@ -12,13 +12,13 @@ import (
 var scenes = map[string]Scenario{}
 var moot = &sync.RWMutex{}
 
-func Init(box packd.Walkable) error {
+func Init(box packd.Walkable, config PlushConfig) error {
 	err := box.Walk(func(path string, file packd.File) error {
 		if filepath.Ext(path) != ".toml" {
 			return nil
 		}
 
-		x, err := render(file)
+		x, err := render(file, config)
 		if err != nil {
 			return errors.Wrap(errors.WithStack(err), path)
 		}

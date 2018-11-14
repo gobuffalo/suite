@@ -74,6 +74,12 @@ type Box interface {
 	packd.Walkable
 }
 
+func NewModelWithFixturesAndConfig(box packd.Box, config fix.PlushConfig) (*Model, error) {
+	m := NewModel()
+	m.Fixtures = box
+	return m, fix.Init(box, config)
+}
+
 func NewModelWithFixtures(box packd.Box) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box

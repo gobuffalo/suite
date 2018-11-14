@@ -11,13 +11,12 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func render(file packr.File) (string, error) {
+func render(file packr.File, config PlushConfig) (string, error) {
 	b, err := ioutil.ReadAll(file)
 	if err != nil {
 		return "", errors.WithStack(err)
 	}
-
-	return plush.Render(string(b), plush.NewContextWith(map[string]interface{}{
+	c := plush.NewContextWith(map[string]interface{}{
 		"uuid": func() uuid.UUID {
 			u, _ := uuid.NewV4()
 			return u
@@ -25,7 +24,20 @@ func render(file packr.File) (string, error) {
 		"uuidNamed": uuidNamed,
 		"now":       time.Now,
 		"hash":      hash,
-	}))
+	})
+	applyPlushConfig(config, c)
+
+
+	return plush.Render(string(b), c)
+}
+type PlushConfig struct {
+	TimeFormat string
+}
+func applyPlushConfig(config PlushConfig, context *plush.Context){
+	if(config.TimeFormat != ""){
+		context.Set("TIME_FORMAT", config.TimeFormat)
+	}
+
 }
 
 func hash(s string, opts map[string]interface{}, help plush.HelperContext) (string, error) {
