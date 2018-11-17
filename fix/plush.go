@@ -4,14 +4,14 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/packd"
 	"github.com/gobuffalo/plush"
 	"github.com/gobuffalo/uuid"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func render(file packr.File) (string, error) {
+func render(file packd.File) (string, error) {
 	b, err := ioutil.ReadAll(file)
 	if err != nil {
 		return "", errors.WithStack(err)
