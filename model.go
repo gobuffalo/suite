@@ -2,6 +2,7 @@ package suite
 
 import (
 	"fmt"
+	"github.com/gobuffalo/plush"
 	"strings"
 
 	"github.com/gobuffalo/envy"
@@ -72,6 +73,12 @@ func NewModel() *Model {
 type Box interface {
 	packd.Finder
 	packd.Walkable
+}
+
+func NewModelWithFixturesAndContext(box packd.Box, ctx *plush.Context) (*Model, error) {
+	m := NewModel()
+	m.Fixtures = box
+	return m, fix.InitWithContext(box, ctx)
 }
 
 func NewModelWithFixtures(box packd.Box) (*Model, error) {
