@@ -1,10 +1,11 @@
 package fix
 
 import (
+	"testing"
+
 	"github.com/gobuffalo/packr"
 	"github.com/gobuffalo/plush"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_Init_And_Find(t *testing.T) {
@@ -57,8 +58,8 @@ func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 
 	box := packr.NewBox("./init-context-fixtures")
 	ctx := plush.NewContextWith(map[string]interface{}{
-		"double": func (num int, help plush.HelperContext) int{
-			return  num * 2
+		"double": func(num int, help plush.HelperContext) int {
+			return num * 2
 		},
 	})
 	r.NoError(InitWithContext(box, ctx))
@@ -101,5 +102,3 @@ func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 	r.Equal(int64(36), row["price"].(int64))
 	r.Equal(wid, row["widget_id"])
 }
-
-

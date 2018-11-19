@@ -1,9 +1,10 @@
 package fix
 
 import (
-	"github.com/gobuffalo/plush"
 	"path/filepath"
 	"sync"
+
+	"github.com/gobuffalo/plush"
 
 	"github.com/BurntSushi/toml"
 	"github.com/gobuffalo/packd"

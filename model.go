@@ -2,8 +2,9 @@ package suite
 
 import (
 	"fmt"
-	"github.com/gobuffalo/plush"
 	"strings"
+
+	"github.com/gobuffalo/plush"
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/packd"

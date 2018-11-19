@@ -11,8 +11,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-
-func renderWithContext(file packd.File, ctx *plush.Context ) (string, error) {
+func renderWithContext(file packd.File, ctx *plush.Context) (string, error) {
 	b, err := ioutil.ReadAll(file)
 	if err != nil {
 		return "", errors.WithStack(err)
@@ -29,7 +28,7 @@ func renderWithContext(file packd.File, ctx *plush.Context ) (string, error) {
 	}
 	for k, v := range cm {
 		if !ctx.Has(k) {
-			ctx.Set(k,v)
+			ctx.Set(k, v)
 		}
 	}
 	return plush.Render(string(b), ctx)
@@ -40,7 +39,6 @@ func render(file packd.File) (string, error) {
 	if err != nil {
 		return "", errors.WithStack(err)
 	}
-
 
 	return plush.Render(string(b), plush.NewContextWith(map[string]interface{}{
 		"uuid": func() uuid.UUID {
@@ -53,7 +51,6 @@ func render(file packd.File) (string, error) {
 	}))
 }
 
-
 func hash(s string, opts map[string]interface{}, help plush.HelperContext) (string, error) {
 	cost := bcrypt.DefaultCost
 	if i, ok := opts["cost"].(int); ok {
@@ -62,9 +59,11 @@ func hash(s string, opts map[string]interface{}, help plush.HelperContext) (stri
 	ph, err := bcrypt.GenerateFromPassword([]byte(s), cost)
 	return string(ph), err
 }
-func now( help plush.HelperContext) string {
+
+func now(help plush.HelperContext) string {
 	return time.Now().Format(time.RFC3339)
 }
+
 func uuidNamed(name string, help plush.HelperContext) uuid.UUID {
 	u, _ := uuid.NewV4()
 	if ux, ok := help.Value(name).(uuid.UUID); ok {
