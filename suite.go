@@ -58,7 +58,9 @@ func (as *Action) SetupTest() {
 		Session: s,
 	}
 
-	as.Model.SetupTest()
+	if as.Model != nil {
+		as.Model.SetupTest()
+	}
 	as.csrf = csrf.New
 	csrf.New = func(next buffalo.Handler) buffalo.Handler {
 		return func(c buffalo.Context) error {
@@ -69,5 +71,7 @@ func (as *Action) SetupTest() {
 
 func (as *Action) TearDownTest() {
 	csrf.New = as.csrf
-	as.Model.TearDownTest()
+	if as.Model != nil {
+		as.Model.TearDownTest()
+	}
 }
