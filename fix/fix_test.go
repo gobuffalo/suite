@@ -3,7 +3,7 @@ package fix
 import (
 	"testing"
 
-	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/packr/v2"
 	"github.com/gobuffalo/plush"
 	"github.com/stretchr/testify/require"
 )
@@ -11,7 +11,7 @@ import (
 func Test_Init_And_Find(t *testing.T) {
 	r := require.New(t)
 
-	box := packr.NewBox("./init-fixtures")
+	box := packr.Folder("./init-fixtures")
 	r.NoError(Init(box))
 
 	s, err := Find("lots of widgets")
@@ -56,7 +56,7 @@ func Test_Init_And_Find(t *testing.T) {
 func Test_InitWithContext_And_Find_CustomConfig(t *testing.T) {
 	r := require.New(t)
 
-	box := packr.NewBox("./init-context-fixtures")
+	box := packr.Folder("./init-context-fixtures")
 	ctx := plush.NewContextWith(map[string]interface{}{
 		"double": func(num int, help plush.HelperContext) int {
 			return num * 2
