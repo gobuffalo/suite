@@ -5,7 +5,7 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/httptest"
-	"github.com/gobuffalo/mw-csrf"
+	csrf "github.com/gobuffalo/mw-csrf"
 	"github.com/gobuffalo/packd"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/suite"
@@ -49,6 +49,10 @@ func (as *Action) HTML(u string, args ...interface{}) *httptest.Request {
 
 func (as *Action) JSON(u string, args ...interface{}) *httptest.JSON {
 	return httptest.New(as.App).JSON(u, args...)
+}
+
+func (as *Action) XML(u string, args ...interface{}) *httptest.XML {
+	return httptest.New(as.App).XML(u, args...)
 }
 
 func (as *Action) SetupTest() {
