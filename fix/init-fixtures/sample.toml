@@ -18,6 +18,13 @@ name = "lots of widgets"
       created_at = "<%= now() %>"
       updated_at = "<%= now() %>"
 
+    [[scenario.table.row]]
+      id = "<%= uuid() %>"
+      name = "This is widget #3"
+      body = "some widget body"
+      created_at = "<%= nowSub(3600) %>"
+      updated_at = "<%= nowAdd(3600) %>"
+
   [[scenario.table]]
     name = "users"
 
