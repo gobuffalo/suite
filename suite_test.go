@@ -1,7 +1,7 @@
 package suite
 
 import (
-	"errors"
+	"fmt"
 	"testing"
 
 	"github.com/gobuffalo/buffalo"
@@ -18,7 +18,7 @@ func Test_aSuite(t *testing.T) {
 		if n, ok := c.Session().Get("name").(string); ok {
 			return c.Render(200, render.String(n))
 		}
-		return c.Error(500, errors.New("could not find name in session"))
+		return c.Error(500, fmt.Errorf("could not find name in session"))
 	})
 	as := &aSuite{NewAction(app)}
 	Run(t, as)
