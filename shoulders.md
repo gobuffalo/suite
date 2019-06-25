@@ -11,6 +11,8 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/envy](https://godoc.org/github.com/gobuffalo/envy)
 
+* [github.com/gobuffalo/genny](https://godoc.org/github.com/gobuffalo/genny)
+
 * [github.com/gobuffalo/httptest](https://godoc.org/github.com/gobuffalo/httptest)
 
 * [github.com/gobuffalo/mw-csrf](https://godoc.org/github.com/gobuffalo/mw-csrf)
@@ -30,8 +32,6 @@ Thank you to the following **GIANTS**:
 * [github.com/jackc/pgx](https://godoc.org/github.com/jackc/pgx)
 
 * [github.com/markbates/going](https://godoc.org/github.com/markbates/going)
-
-* [github.com/pkg/errors](https://godoc.org/github.com/pkg/errors)
 
 * [github.com/stretchr/testify](https://godoc.org/github.com/stretchr/testify)
 
