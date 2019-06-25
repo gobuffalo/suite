@@ -7,7 +7,6 @@ import (
 	"github.com/gobuffalo/httptest"
 	csrf "github.com/gobuffalo/mw-csrf"
 	"github.com/gobuffalo/packd"
-	"github.com/pkg/errors"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -30,7 +29,7 @@ func NewAction(app *buffalo.App) *Action {
 func NewActionWithFixtures(app *buffalo.App, box packd.Box) (*Action, error) {
 	m, err := NewModelWithFixtures(box)
 	if err != nil {
-		return nil, errors.WithStack(err)
+		return nil, err
 	}
 	as := &Action{
 		App:   app,
