@@ -47,11 +47,11 @@ func (as *Model) LoadFixture(name string) {
 
 	for _, table := range sc.Tables {
 		for _, row := range table.Row {
-			q := "insert into " + table.Name
+			q := fmt.Sprintf("insert into %s", as.DB.Dialect.Quote(table.Name))
 			keys := []string{}
 			skeys := []string{}
 			for k := range row {
-				keys = append(keys, k)
+				keys = append(keys, as.DB.Dialect.Quote(k))
 				skeys = append(skeys, ":"+k)
 			}
 
