@@ -18,7 +18,7 @@ func Test_hash(t *testing.T) {
 func Test_nowAdd(t *testing.T) {
 	offset := 1000
 	r := require.New(t)
-	tStr := nowAdd(offset, plush.HelperContext{})
+	tStr := nowAdd(offset)
 	r.NotEmpty(tStr)
 	exp := time.Now().Add(time.Second * time.Duration(offset))
 	act, err := time.Parse(time.RFC3339, tStr)
@@ -29,7 +29,7 @@ func Test_nowAdd(t *testing.T) {
 func Test_nowSub(t *testing.T) {
 	offset := 1000
 	r := require.New(t)
-	tStr := nowSub(offset, plush.HelperContext{})
+	tStr := nowSub(offset)
 	r.NotEmpty(tStr)
 	exp := time.Now().Add(time.Second * -time.Duration(offset))
 	act, err := time.Parse(time.RFC3339, tStr)
