@@ -68,11 +68,11 @@ func now(help plush.HelperContext) string {
 	return time.Now().Format(time.RFC3339)
 }
 
-func nowAdd(s int, help plush.HelperContext) string {
+func nowAdd(s int) string {
 	return time.Now().Add(time.Second * time.Duration(s)).Format(time.RFC3339)
 }
 
-func nowSub(s int, help plush.HelperContext) string {
+func nowSub(s int) string {
 	return time.Now().Add(time.Second * -time.Duration(s)).Format(time.RFC3339)
 }
 
