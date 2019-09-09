@@ -24,6 +24,8 @@ func renderWithContext(file packd.File, ctx *plush.Context) (string, error) {
 		"uuidNamed": uuidNamed,
 		"now":       now,
 		"hash":      hash,
+		"nowAdd":    nowAdd,
+		"nowSub":    nowSub,
 	}
 	for k, v := range cm {
 		if !ctx.Has(k) {
@@ -47,6 +49,8 @@ func render(file packd.File) (string, error) {
 		"uuidNamed": uuidNamed,
 		"now":       now,
 		"hash":      hash,
+		"nowAdd":    nowAdd,
+		"nowSub":    nowSub,
 	}))
 }
 
@@ -61,6 +65,14 @@ func hash(s string, opts map[string]interface{}, help plush.HelperContext) (stri
 
 func now(help plush.HelperContext) string {
 	return time.Now().Format(time.RFC3339)
+}
+
+func nowAdd(s int) string {
+	return time.Now().Add(time.Second * time.Duration(s)).Format(time.RFC3339)
+}
+
+func nowSub(s int) string {
+	return time.Now().Add(time.Second * -time.Duration(s)).Format(time.RFC3339)
 }
 
 func uuidNamed(name string, help plush.HelperContext) uuid.UUID {

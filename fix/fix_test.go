@@ -22,7 +22,7 @@ func Test_Init_And_Find(t *testing.T) {
 
 	table := s.Tables[0]
 	r.Equal("widgets", table.Name)
-	r.Len(table.Row, 2)
+	r.Len(table.Row, 3)
 
 	row := table.Row[0]
 	r.NotZero(row["id"])
@@ -38,6 +38,13 @@ func Test_Init_And_Find(t *testing.T) {
 	r.NotZero(row["created_at"])
 	r.NotZero(row["updated_at"])
 	r.Equal("This is widget #2", row["name"])
+	r.Equal("some widget body", row["body"])
+
+	row = table.Row[2]
+	r.NotZero(row["id"])
+	r.NotZero(row["created_at"])
+	r.NotZero(row["updated_at"])
+	r.Equal("This is widget #3", row["name"])
 	r.Equal("some widget body", row["body"])
 
 	table = s.Tables[1]
