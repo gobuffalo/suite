@@ -39,6 +39,7 @@ func NewActionWithFixtures(app *buffalo.App, box packd.Box) (*Action, error) {
 	return as, nil
 }
 
+// NewActionWithFixturesAndContext returns new Action for given buffalo.App with fixtures and a plush context.
 func NewActionWithFixturesAndContext(app *buffalo.App, box packd.Box, ctx *plush.Context) (*Action, error) {
 	m, err := NewModelWithFixturesAndContext(box, ctx)
 	if err != nil {
