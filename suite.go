@@ -7,6 +7,7 @@ import (
 	"github.com/gobuffalo/httptest"
 	csrf "github.com/gobuffalo/mw-csrf"
 	"github.com/gobuffalo/packd"
+	"github.com/gobuffalo/plush"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -28,6 +29,18 @@ func NewAction(app *buffalo.App) *Action {
 
 func NewActionWithFixtures(app *buffalo.App, box packd.Box) (*Action, error) {
 	m, err := NewModelWithFixtures(box)
+	if err != nil {
+		return nil, err
+	}
+	as := &Action{
+		App:   app,
+		Model: m,
+	}
+	return as, nil
+}
+
+func NewActionWithFixturesAndContext(app *buffalo.App, box packd.Box, ctx *plush.Context) (*Action, error) {
+	m, err := NewModelWithFixturesAndContext(box, ctx)
 	if err != nil {
 		return nil, err
 	}
