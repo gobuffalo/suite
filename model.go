@@ -8,7 +8,7 @@ import (
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/packd"
-	"github.com/gobuffalo/pop"
+	"github.com/gobuffalo/pop/v5"
 	"github.com/gobuffalo/suite/fix"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
