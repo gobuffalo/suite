@@ -1,4 +1,7 @@
-# suite
+
+![](https://github.com/gobuffalo/suite/workflows/Tests/badge.svg)
+
+# Suite
 
 Suite is a package meant to make testing [gobuffalo.io](http://gobuffalo.io) applications easier.
 
