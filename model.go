@@ -76,12 +76,14 @@ func NewModel() *Model {
 	return m
 }
 
+// NewModelWithFixturesAndContext ...
 func NewModelWithFixturesAndContext(box Box, ctx *plush.Context) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
 	return m, fix.InitWithContext(box, ctx)
 }
 
+// NewModelWithFixtures ...
 func NewModelWithFixtures(box Box) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
