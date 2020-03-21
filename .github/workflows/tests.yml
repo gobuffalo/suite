@@ -18,5 +18,3 @@ jobs:
       run: |
         go mod tidy -v
         go test -race ./...
-    - name: Run golangci-lint
-      uses: actions-contrib/golangci-lint@v1
