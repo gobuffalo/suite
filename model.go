@@ -7,20 +7,21 @@ import (
 	"github.com/gobuffalo/plush"
 
 	"github.com/gobuffalo/envy"
-	"github.com/gobuffalo/packd"
 	"github.com/gobuffalo/pop/v5"
 	"github.com/gobuffalo/suite/v3/fix"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
 
+// Model suite
 type Model struct {
 	suite.Suite
 	*require.Assertions
 	DB       *pop.Connection
-	Fixtures packd.Finder
+	Fixtures Box
 }
 
+// SetupTest clears database
 func (m *Model) SetupTest() {
 	m.Assertions = require.New(m.T())
 	if m.DB != nil {
@@ -29,8 +30,10 @@ func (m *Model) SetupTest() {
 	}
 }
 
+// TearDownTest will be called after tests finish
 func (m *Model) TearDownTest() {}
 
+// DBDelta ...
 func (m *Model) DBDelta(delta int, name string, fn func()) {
 	sc, err := m.DB.Count(name)
 	m.NoError(err)
@@ -40,10 +43,11 @@ func (m *Model) DBDelta(delta int, name string, fn func()) {
 	m.Equal(sc+delta, ec)
 }
 
-func (as *Model) LoadFixture(name string) {
+// LoadFixture ...
+func (m *Model) LoadFixture(name string) {
 	sc, err := fix.Find(name)
-	as.NoError(err)
-	db := as.DB.Store
+	m.NoError(err)
+	db := m.DB.Store
 
 	for _, table := range sc.Tables {
 		for _, row := range table.Row {
@@ -57,11 +61,12 @@ func (as *Model) LoadFixture(name string) {
 
 			q = q + fmt.Sprintf(" (%s) values (%s)", strings.Join(keys, ","), strings.Join(skeys, ","))
 			_, err = db.NamedExec(q, row)
-			as.NoError(err)
+			m.NoError(err)
 		}
 	}
 }
 
+// NewModel ...
 func NewModel() *Model {
 	m := &Model{}
 	c, err := pop.Connect(envy.Get("GO_ENV", "test"))
@@ -71,18 +76,13 @@ func NewModel() *Model {
 	return m
 }
 
-type Box interface {
-	packd.Finder
-	packd.Walkable
-}
-
-func NewModelWithFixturesAndContext(box packd.Box, ctx *plush.Context) (*Model, error) {
+func NewModelWithFixturesAndContext(box Box, ctx *plush.Context) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
 	return m, fix.InitWithContext(box, ctx)
 }
 
-func NewModelWithFixtures(box packd.Box) (*Model, error) {
+func NewModelWithFixtures(box Box) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
 	return m, fix.Init(box)

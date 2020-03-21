@@ -6,10 +6,10 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/httptest"
 	csrf "github.com/gobuffalo/mw-csrf"
-	"github.com/gobuffalo/packd"
 	"github.com/stretchr/testify/suite"
 )
 
+// Action suite
 type Action struct {
 	*Model
 	Session *buffalo.Session
@@ -17,45 +17,24 @@ type Action struct {
 	csrf    buffalo.MiddlewareFunc
 }
 
-// NewAction returns new Action for given buffalo.App
-func NewAction(app *buffalo.App) *Action {
-	as := &Action{
-		App:   app,
-		Model: NewModel(),
-	}
-	return as
-}
-
-func NewActionWithFixtures(app *buffalo.App, box packd.Box) (*Action, error) {
-	m, err := NewModelWithFixtures(box)
-	if err != nil {
-		return nil, err
-	}
-	as := &Action{
-		App:   app,
-		Model: m,
-	}
-	return as, nil
-}
-
-func Run(t *testing.T, s suite.TestingSuite) {
-	suite.Run(t, s)
-}
-
+// HTML ...
 func (as *Action) HTML(u string, args ...interface{}) *httptest.Request {
 	return httptest.New(as.App).HTML(u, args...)
 }
 
+// JSON ...
 func (as *Action) JSON(u string, args ...interface{}) *httptest.JSON {
 	return httptest.New(as.App).JSON(u, args...)
 }
 
+// XML ...
 func (as *Action) XML(u string, args ...interface{}) *httptest.XML {
 	return httptest.New(as.App).XML(u, args...)
 }
 
+// SetupTest sets the session store, CSRF and clears database
 func (as *Action) SetupTest() {
-	as.App.SessionStore = NewSessionStore()
+	as.App.SessionStore = newSessionStore()
 	s, _ := as.App.SessionStore.New(nil, as.App.SessionName)
 	as.Session = &buffalo.Session{
 		Session: s,
@@ -72,9 +51,37 @@ func (as *Action) SetupTest() {
 	}
 }
 
+// TearDownTest resets csrf
 func (as *Action) TearDownTest() {
 	csrf.New = as.csrf
 	if as.Model != nil {
 		as.Model.TearDownTest()
 	}
+}
+
+// NewAction returns new Action for given buffalo.App
+func NewAction(app *buffalo.App) *Action {
+	as := &Action{
+		App:   app,
+		Model: NewModel(),
+	}
+	return as
+}
+
+// NewActionWithFixtures ...
+func NewActionWithFixtures(app *buffalo.App, box Box) (*Action, error) {
+	m, err := NewModelWithFixtures(box)
+	if err != nil {
+		return nil, err
+	}
+	as := &Action{
+		App:   app,
+		Model: m,
+	}
+	return as, nil
+}
+
+//Run the passed suite
+func Run(t *testing.T, s suite.TestingSuite) {
+	suite.Run(t, s)
 }
