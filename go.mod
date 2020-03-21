@@ -11,7 +11,7 @@ require (
 	github.com/gobuffalo/packd v1.0.0
 	github.com/gobuffalo/packr/v2 v2.7.1
 	github.com/gobuffalo/plush v3.8.3+incompatible
-	github.com/gobuffalo/pop/v5 v5.0.8
+	github.com/gobuffalo/pop/v5 v5.0.9
 	github.com/gofrs/uuid v3.2.0+incompatible
 	github.com/gorilla/sessions v1.2.0
 	github.com/stretchr/testify v1.4.0
