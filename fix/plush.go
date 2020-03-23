@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gobuffalo/packd"
-	"github.com/gobuffalo/plush"
-	"github.com/gofrs/uuid"
+	"github.com/gobuffalo/plush/v4"
+	"github.com/gofrs/uuid/v3"
 	"golang.org/x/crypto/bcrypt"
 )
 

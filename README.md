@@ -1,4 +1,7 @@
-# suite
+
+![](https://github.com/gobuffalo/suite/workflows/Tests/badge.svg)
+
+# Suite
 
 Suite is a package meant to make testing [gobuffalo.io](http://gobuffalo.io) applications easier.
 
@@ -16,7 +19,7 @@ package actions_test
 import (
 	"testing"
 
-	"github.com/gobuffalo/suite"
+	"github.com/gobuffalo/suite/v3"
 	"github.com/gobuffalo/toodo/actions"
 )
 
@@ -131,7 +134,7 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/packr/v2"
-	"github.com/gobuffalo/suite"
+	"github.com/gobuffalo/suite/v3"
 )
 
 type ActionSuite struct {

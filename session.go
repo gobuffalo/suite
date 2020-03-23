@@ -10,12 +10,6 @@ type sessionStore struct {
 	sessions map[string]*sessions.Session
 }
 
-func NewSessionStore() sessions.Store {
-	return &sessionStore{
-		sessions: map[string]*sessions.Session{},
-	}
-}
-
 func (s *sessionStore) Get(r *http.Request, name string) (*sessions.Session, error) {
 	if s, ok := s.sessions[name]; ok {
 		return s, nil
@@ -35,4 +29,11 @@ func (s *sessionStore) Save(r *http.Request, w http.ResponseWriter, sess *sessio
 	}
 	s.sessions[sess.Name()] = sess
 	return nil
+}
+
+//NewSessionStore for action suite
+func newSessionStore() sessions.Store {
+	return &sessionStore{
+		sessions: map[string]*sessions.Session{},
+	}
 }
