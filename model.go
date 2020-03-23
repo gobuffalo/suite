@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gobuffalo/plush"
+	"github.com/gobuffalo/plush/v4"
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/pop/v5"
@@ -33,7 +33,7 @@ func (m *Model) SetupTest() {
 // TearDownTest will be called after tests finish
 func (m *Model) TearDownTest() {}
 
-// DBDelta ...
+// DBDelta checks database table count change for a passed table name.
 func (m *Model) DBDelta(delta int, name string, fn func()) {
 	sc, err := m.DB.Count(name)
 	m.NoError(err)
@@ -43,7 +43,7 @@ func (m *Model) DBDelta(delta int, name string, fn func()) {
 	m.Equal(sc+delta, ec)
 }
 
-// LoadFixture ...
+// LoadFixture loads a named fixture into the database.
 func (m *Model) LoadFixture(name string) {
 	sc, err := fix.Find(name)
 	m.NoError(err)
@@ -66,7 +66,7 @@ func (m *Model) LoadFixture(name string) {
 	}
 }
 
-// NewModel ...
+// NewModel creates a new model suite
 func NewModel() *Model {
 	m := &Model{}
 	c, err := pop.Connect(envy.Get("GO_ENV", "test"))
@@ -76,14 +76,14 @@ func NewModel() *Model {
 	return m
 }
 
-// NewModelWithFixturesAndContext ...
+// NewModelWithFixturesAndContext creates a new model suite with fixtures and a passed context.
 func NewModelWithFixturesAndContext(box Box, ctx *plush.Context) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box
 	return m, fix.InitWithContext(box, ctx)
 }
 
-// NewModelWithFixtures ...
+// NewModelWithFixtures creates a new model with passed fixtures box
 func NewModelWithFixtures(box Box) (*Model, error) {
 	m := NewModel()
 	m.Fixtures = box

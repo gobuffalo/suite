@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/packr/v2"
-	"github.com/gobuffalo/plush"
+	"github.com/gobuffalo/plush/v4"
 	"github.com/stretchr/testify/require"
 )
 

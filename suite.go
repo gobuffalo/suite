@@ -17,17 +17,17 @@ type Action struct {
 	csrf    buffalo.MiddlewareFunc
 }
 
-// HTML ...
+// HTML creates an httptest.Request with HTML content type.
 func (as *Action) HTML(u string, args ...interface{}) *httptest.Request {
 	return httptest.New(as.App).HTML(u, args...)
 }
 
-// JSON ...
+// JSON creates an httptest.JSON request
 func (as *Action) JSON(u string, args ...interface{}) *httptest.JSON {
 	return httptest.New(as.App).JSON(u, args...)
 }
 
-// XML ...
+// XML creates an httptest.XML request
 func (as *Action) XML(u string, args ...interface{}) *httptest.XML {
 	return httptest.New(as.App).XML(u, args...)
 }
@@ -68,7 +68,7 @@ func NewAction(app *buffalo.App) *Action {
 	return as
 }
 
-// NewActionWithFixtures ...
+// NewActionWithFixtures creates a new ActionSuite with passed box for fixtures.
 func NewActionWithFixtures(app *buffalo.App, box Box) (*Action, error) {
 	m, err := NewModelWithFixtures(box)
 	if err != nil {

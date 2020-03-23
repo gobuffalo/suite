@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/gobuffalo/plush"
+	"github.com/gobuffalo/plush/v4"
 
 	"github.com/BurntSushi/toml"
 	"github.com/gobuffalo/packd"
