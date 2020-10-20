@@ -6,7 +6,7 @@ import (
 
 	"github.com/gobuffalo/packd"
 	"github.com/gobuffalo/plush/v4"
-	"github.com/gofrs/uuid/v3"
+	"github.com/gofrs/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
