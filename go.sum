@@ -522,6 +522,8 @@ github.com/gobuffalo/pop/v5 v5.0.9/go.mod h1:mZJHJbA3cy2V18abXYuVop2ldEJ8UZ2DK6q
 github.com/gobuffalo/pop/v5 v5.0.11/go.mod h1:mZJHJbA3cy2V18abXYuVop2ldEJ8UZ2DK6qOekC5u5g=
 github.com/gobuffalo/pop/v5 v5.3.2-0.20210127203350-119c0d2898c0 h1:SsIPD1jkQIVmlApTmQUkZnDUugD+CiXFOSPyh2m6+p4=
 github.com/gobuffalo/pop/v5 v5.3.2-0.20210127203350-119c0d2898c0/go.mod h1:Ey1hqzDLkWQKNEfsnafaz+3P1h/TrS++W9PmpGsNxvk=
+github.com/gobuffalo/pop/v5 v5.3.2 h1:LSdvve4gvBzogW85fZrvbSWJlHmJqTKRTOHcPhoh0AY=
+github.com/gobuffalo/pop/v5 v5.3.2/go.mod h1:Ey1hqzDLkWQKNEfsnafaz+3P1h/TrS++W9PmpGsNxvk=
 github.com/gobuffalo/release v1.0.35/go.mod h1:VtHFAKs61vO3wboCec5xr9JPTjYyWYcvaM3lclkc4x4=
 github.com/gobuffalo/release v1.0.38/go.mod h1:VtHFAKs61vO3wboCec5xr9JPTjYyWYcvaM3lclkc4x4=
 github.com/gobuffalo/release v1.0.42/go.mod h1:RPs7EtafH4oylgetOJpGP0yCZZUiO4vqHfTHJjSdpug=
