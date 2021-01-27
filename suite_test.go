@@ -1,4 +1,4 @@
-package suite
+package suite_test
 
 import (
 	"fmt"
@@ -6,10 +6,11 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/buffalo/render"
+	"github.com/gobuffalo/suite/v3"
 )
 
 type aSuite struct {
-	*Action
+	*suite.Action
 }
 
 func Test_aSuite(t *testing.T) {
@@ -20,8 +21,8 @@ func Test_aSuite(t *testing.T) {
 		}
 		return c.Error(500, fmt.Errorf("could not find name in session"))
 	})
-	as := &aSuite{NewAction(app)}
-	Run(t, as)
+	as := &aSuite{suite.NewAction(app)}
+	suite.Run(t, as)
 }
 
 func (as *aSuite) Test_Session() {
