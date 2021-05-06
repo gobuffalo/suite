@@ -25,7 +25,7 @@ type Model struct {
 func (m *Model) SetupTest() {
 	m.Assertions = require.New(m.T())
 	if m.DB != nil {
-		err := m.DB.TruncateAll()
+		err := m.CleanDB()
 		m.NoError(err)
 	}
 }
@@ -95,4 +95,39 @@ func (m *Model) Run(name string, subtest func()) bool {
 		m.Assertions = require.New(m.Suite.T())
 		subtest()
 	})
+}
+
+// CleanDB clears records from the database, this function is
+// useful to run before tests to ensure other tests are not
+// affecting the one running.
+func (m *Model) CleanDB() error {
+	if m.DB == nil {
+		return nil
+	}
+
+	switch m.DB.Dialect.Name() {
+	case "postgres":
+		deleteAllQuery := `DO
+		$func$
+			DECLARE
+			_tbl text;
+			_sch text;
+			BEGIN
+			FOR _sch, _tbl IN
+				SELECT schemaname, tablename
+				FROM   pg_tables
+				WHERE  tablename <> '%s' AND schemaname NOT IN ('pg_catalog', 'information_schema') AND tableowner = current_user
+			LOOP
+				--RAISE ERROR '%%',
+				EXECUTE  -- dangerous, test before you execute!
+					format('DELETE FROM %%I.%%I CASCADE', _sch, _tbl);
+			END LOOP;
+			END
+		$func$;`
+
+		q := m.DB.RawQuery(fmt.Sprintf(deleteAllQuery, m.DB.MigrationTableName()))
+		return q.Exec()
+	default:
+		return m.DB.TruncateAll()
+	}
 }
