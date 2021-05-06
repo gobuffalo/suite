@@ -89,3 +89,10 @@ func NewModelWithFixtures(box Box) (*Model, error) {
 	m.Fixtures = box
 	return m, fix.Init(box)
 }
+
+func (m *Model) Run(name string, subtest func()) bool {
+	return m.Suite.Run(name, func() {
+		m.Assertions = require.New(m.Suite.T())
+		subtest()
+	})
+}
