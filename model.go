@@ -113,15 +113,15 @@ func (m *Model) CleanDB() error {
 			_tbl text;
 			_sch text;
 			BEGIN
-			FOR _sch, _tbl IN
-				SELECT schemaname, tablename
-				FROM   pg_tables
-				WHERE  tablename <> '%s' AND schemaname NOT IN ('pg_catalog', 'information_schema') AND tableowner = current_user
-			LOOP
-				--RAISE ERROR '%%',
-				EXECUTE  -- dangerous, test before you execute!
-					format('DELETE FROM %%I.%%I CASCADE', _sch, _tbl);
-			END LOOP;
+				FOR _sch, _tbl IN
+					SELECT schemaname, tablename
+					FROM   pg_tables
+					WHERE  tablename <> '%s' AND schemaname NOT IN ('pg_catalog', 'information_schema') AND tableowner = current_user
+				LOOP
+					EXECUTE format('ALTER TABLE %%I.%%I DISABLE TRIGGER ALL;', _sch, _tbl);
+					EXECUTE format('DELETE FROM %%I.%%I CASCADE', _sch, _tbl);
+					EXECUTE format('ALTER TABLE %%I.%%I ENABLE TRIGGER ALL;', _sch, _tbl);
+				END LOOP;
 			END
 		$func$;`
 
