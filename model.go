@@ -2,13 +2,13 @@ package suite
 
 import (
 	"fmt"
+	"io/fs"
 	"strings"
 
-	"github.com/gobuffalo/plush/v4"
-
 	"github.com/gobuffalo/envy"
+	"github.com/gobuffalo/plush/v4"
 	"github.com/gobuffalo/pop/v5"
-	"github.com/gobuffalo/suite/v3/fix"
+	"github.com/gobuffalo/suite/v4/fix"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
@@ -18,7 +18,7 @@ type Model struct {
 	suite.Suite
 	*require.Assertions
 	DB       *pop.Connection
-	Fixtures Box
+	Fixtures fs.FS
 }
 
 // SetupTest clears database
@@ -77,17 +77,17 @@ func NewModel() *Model {
 }
 
 // NewModelWithFixturesAndContext creates a new model suite with fixtures and a passed context.
-func NewModelWithFixturesAndContext(box Box, ctx *plush.Context) (*Model, error) {
+func NewModelWithFixturesAndContext(fsys fs.FS, ctx *plush.Context) (*Model, error) {
 	m := NewModel()
-	m.Fixtures = box
-	return m, fix.InitWithContext(box, ctx)
+	m.Fixtures = fsys
+	return m, fix.InitWithContext(fsys, ctx)
 }
 
 // NewModelWithFixtures creates a new model with passed fixtures box
-func NewModelWithFixtures(box Box) (*Model, error) {
+func NewModelWithFixtures(fsys fs.FS) (*Model, error) {
 	m := NewModel()
-	m.Fixtures = box
-	return m, fix.Init(box)
+	m.Fixtures = fsys
+	return m, fix.Init(fsys)
 }
 
 func (m *Model) Run(name string, subtest func()) bool {

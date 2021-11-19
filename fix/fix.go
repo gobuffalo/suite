@@ -2,25 +2,37 @@ package fix
 
 import (
 	"fmt"
+	"io/fs"
 	"path/filepath"
 	"sync"
 
-	"github.com/gobuffalo/plush/v4"
-
 	"github.com/BurntSushi/toml"
-	"github.com/gobuffalo/packd"
+	"github.com/gobuffalo/plush/v4"
 )
 
 var scenes = map[string]Scenario{}
 var moot = &sync.RWMutex{}
 
-func InitWithContext(box packd.Walkable, ctx *plush.Context) error {
-	err := box.Walk(func(path string, file packd.File) error {
-		if filepath.Ext(path) != ".toml" {
+func InitWithContext(fsys fs.FS, ctx *plush.Context) error {
+	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if d.IsDir() {
 			return nil
 		}
 
-		x, err := renderWithContext(file, ctx)
+		if filepath.Ext(d.Name()) != ".toml" {
+			return nil
+		}
+
+		f, err := fsys.Open(path)
+		if err != nil {
+			return err
+		}
+
+		x, err := renderWithContext(f, ctx)
 		if err != nil {
 			return err
 		}
@@ -41,13 +53,26 @@ func InitWithContext(box packd.Walkable, ctx *plush.Context) error {
 	return err
 }
 
-func Init(box packd.Walkable) error {
-	err := box.Walk(func(path string, file packd.File) error {
-		if filepath.Ext(path) != ".toml" {
+func Init(fsys fs.FS) error {
+	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if d.IsDir() {
 			return nil
 		}
 
-		x, err := render(file)
+		if filepath.Ext(d.Name()) != ".toml" {
+			return nil
+		}
+
+		f, err := fsys.Open(path)
+		if err != nil {
+			return err
+		}
+
+		x, err := render(f)
 		if err != nil {
 			return err
 		}
