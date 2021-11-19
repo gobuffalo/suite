@@ -125,15 +125,15 @@ Often it is useful to load a series of data into the database at the start of th
 
 ### Using Fixtures
 
-First you need to setup your test suite to use fixtures. You can do this by using `suite.NewActionWithFixtures` or `suite.NewModelWithFixtures` methods to create new test suites that take a `packd.Box` pointing to where the files for this suite live.
+First you need to setup your test suite to use fixtures. You can do this by using `suite.NewActionWithFixtures` or `suite.NewModelWithFixtures` methods to create new test suites that take an `fs.FS` pointing to where the files for this suite live.
 
 ```go
 package actions
 
 import (
+    "os"
     "testing"
 
-    "github.com/gobuffalo/packr/v2"
     "github.com/gobuffalo/suite/v4"
 )
 
@@ -142,7 +142,7 @@ type ActionSuite struct {
 }
 
 func Test_ActionSuite(t *testing.T) {
-    action, err := suite.NewActionWithFixtures(App(), packr.New("my box", "../fixtures"))
+    action, err := suite.NewActionWithFixtures(App(), os.DirFS("../fixtures"))
     if err != nil {
         t.Fatal(err)
     }
