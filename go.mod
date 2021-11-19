@@ -1,19 +1,19 @@
-module github.com/gobuffalo/suite/v3
+module github.com/gobuffalo/suite/v4
 
-go 1.13
+go 1.16
 
 require (
-	github.com/BurntSushi/toml v0.3.1
-	github.com/gobuffalo/buffalo v0.15.5
-	github.com/gobuffalo/envy v1.9.0
-	github.com/gobuffalo/httptest v1.5.0
+	github.com/BurntSushi/toml v0.4.1
+	github.com/gobuffalo/buffalo v0.17.4
+	github.com/gobuffalo/envy v1.10.1
+	github.com/gobuffalo/httptest v1.5.1
 	github.com/gobuffalo/mw-csrf v1.0.0
-	github.com/gobuffalo/packd v1.0.0
-	github.com/gobuffalo/packr/v2 v2.8.0
-	github.com/gobuffalo/plush/v4 v4.1.0
-	github.com/gobuffalo/pop/v5 v5.3.2
-	github.com/gofrs/uuid v3.2.0+incompatible
-	github.com/gorilla/sessions v1.2.0
-	github.com/stretchr/testify v1.5.1
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+	github.com/gobuffalo/packd v1.0.1
+	github.com/gobuffalo/packr/v2 v2.8.1
+	github.com/gobuffalo/plush/v4 v4.1.8
+	github.com/gobuffalo/pop/v5 v5.3.4
+	github.com/gofrs/uuid v4.1.0+incompatible
+	github.com/gorilla/sessions v1.2.1
+	github.com/stretchr/testify v1.7.0
+	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
 )
