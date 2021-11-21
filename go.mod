@@ -4,11 +4,11 @@ go 1.16
 
 require (
 	github.com/BurntSushi/toml v0.4.1
-	github.com/gobuffalo/buffalo v0.17.4
+	github.com/gobuffalo/buffalo v0.17.5
 	github.com/gobuffalo/envy v1.10.1
 	github.com/gobuffalo/httptest v1.5.1
 	github.com/gobuffalo/mw-csrf v1.0.0
-	github.com/gobuffalo/plush/v4 v4.1.8
+	github.com/gobuffalo/plush/v4 v4.1.9
 	github.com/gobuffalo/pop/v5 v5.3.4
 	github.com/gofrs/uuid v4.1.0+incompatible
 	github.com/gorilla/sessions v1.2.1
