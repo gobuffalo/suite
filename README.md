@@ -1,7 +1,7 @@
 
-![](https://github.com/gobuffalo/suite/workflows/Tests/badge.svg)
-
 # Suite
+
+![Tests](https://github.com/gobuffalo/suite/workflows/Tests/badge.svg)
 
 Suite is a package meant to make testing [gobuffalo.io](http://gobuffalo.io) applications easier.
 
@@ -17,19 +17,19 @@ compatible with the `go test` command, and it should:
 package actions_test
 
 import (
-	"testing"
+    "testing"
 
-	"github.com/gobuffalo/suite/v3"
-	"github.com/gobuffalo/toodo/actions"
+    "github.com/gobuffalo/suite/v4"
+    "github.com/gobuffalo/toodo/actions"
 )
 
 type ActionSuite struct {
-	*suite.Action
+    *suite.Action
 }
 
 func Test_ActionSuite(t *testing.T) {
-	as := &ActionSuite{suite.NewAction(actions.App())}
-	suite.Run(t, as)
+    as := &ActionSuite{suite.NewAction(actions.App())}
+    suite.Run(t, as)
 }
 ```
 
@@ -53,69 +53,69 @@ A few additional notes:
 package actions_test
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/gobuffalo/toodo/models"
+    "github.com/gobuffalo/toodo/models"
 )
 
 func (as *ActionSuite) Test_TodosResource_List() {
-	todos := models.Todos{
-		{Title: "buy milk"},
-		{Title: "read a good book"},
-	}
-	for _, t := range todos {
-		err := as.DB.Create(&t)
-		as.NoError(err)
-	}
+    todos := models.Todos{
+        {Title: "buy milk"},
+        {Title: "read a good book"},
+    }
+    for _, t := range todos {
+        err := as.DB.Create(&t)
+        as.NoError(err)
+    }
 
-	res := as.HTML("/todos").Get()
-	body := res.Body.String()
-	for _, t := range todos {
-		as.Contains(body, fmt.Sprintf("<h2>%s</h2>", t.Title))
-	}
+    res := as.HTML("/todos").Get()
+    body := res.Body.String()
+    for _, t := range todos {
+        as.Contains(body, fmt.Sprintf("<h2>%s</h2>", t.Title))
+    }
 }
 
 func (as *ActionSuite) Test_TodosResource_New() {
-	res := as.HTML("/todos/new").Get()
-	as.Contains(res.Body.String(), "<h1>New Todo</h1>")
+    res := as.HTML("/todos/new").Get()
+    as.Contains(res.Body.String(), "<h1>New Todo</h1>")
 }
 
 func (as *ActionSuite) Test_TodosResource_Create() {
-	todo := &models.Todo{Title: "Learn Go"}
-	res := as.HTML("/todos").Post(todo)
-	as.Equal(301, res.Code)
-	as.Equal("/todos", res.Location())
+    todo := &models.Todo{Title: "Learn Go"}
+    res := as.HTML("/todos").Post(todo)
+    as.Equal(301, res.Code)
+    as.Equal("/todos", res.Location())
 
-	err := as.DB.First(todo)
-	as.NoError(err)
-	as.NotZero(todo.ID)
-	as.NotZero(todo.CreatedAt)
-	as.Equal("Learn Go", todo.Title)
+    err := as.DB.First(todo)
+    as.NoError(err)
+    as.NotZero(todo.ID)
+    as.NotZero(todo.CreatedAt)
+    as.Equal("Learn Go", todo.Title)
 }
 
 func (as *ActionSuite) Test_TodosResource_Create_Errors() {
-	todo := &models.Todo{}
-	res := as.HTML("/todos").Post(todo)
-	as.Equal(422, res.Code)
-	as.Contains(res.Body.String(), "Title can not be blank.")
+    todo := &models.Todo{}
+    res := as.HTML("/todos").Post(todo)
+    as.Equal(422, res.Code)
+    as.Contains(res.Body.String(), "Title can not be blank.")
 
-	c, err := as.DB.Count(todo)
-	as.NoError(err)
-	as.Equal(0, c)
+    c, err := as.DB.Count(todo)
+    as.NoError(err)
+    as.Equal(0, c)
 }
 
 func (as *ActionSuite) Test_TodosResource_Update() {
-	todo := &models.Todo{Title: "Lern Go"}
-	verrs, err := as.DB.ValidateAndCreate(todo)
-	as.NoError(err)
-	as.False(verrs.HasAny())
+    todo := &models.Todo{Title: "Lern Go"}
+    verrs, err := as.DB.ValidateAndCreate(todo)
+    as.NoError(err)
+    as.False(verrs.HasAny())
 
-	res := as.HTML("/todos/%s", todo.ID).Put(&models.Todo{ID: todo.ID, Title: "Learn Go"})
-	as.Equal(200, res.Code)
+    res := as.HTML("/todos/%s", todo.ID).Put(&models.Todo{ID: todo.ID, Title: "Learn Go"})
+    as.Equal(200, res.Code)
 
-	err = as.DB.Reload(todo)
-	as.NoError(err)
-	as.Equal("Learn Go", todo.Title)
+    err = as.DB.Reload(todo)
+    as.NoError(err)
+    as.Equal("Learn Go", todo.Title)
 }
 ```
 
@@ -123,34 +123,34 @@ func (as *ActionSuite) Test_TodosResource_Update() {
 
 Often it is useful to load a series of data into the database at the start of the test to make testing easier. For example, you need to have a user in the database to log a person into the application, or you need some data in the database to test destroying that data. Fixtures let us solve these problems easily.
 
-### Usage
+### Using Fixtures
 
-First you need to setup your test suite to use fixtures. You can do this by using `suite.NewActionWithFixtures` or `suite.NewModelWithFixtures` methods to create new test suites that take a `packd.Box` pointing to where the files for this suite live.
+First you need to setup your test suite to use fixtures. You can do this by using `suite.NewActionWithFixtures` or `suite.NewModelWithFixtures` methods to create new test suites that take an `fs.FS` pointing to where the files for this suite live.
 
 ```go
 package actions
 
 import (
-	"testing"
+    "os"
+    "testing"
 
-	"github.com/gobuffalo/packr/v2"
-	"github.com/gobuffalo/suite/v3"
+    "github.com/gobuffalo/suite/v4"
 )
 
 type ActionSuite struct {
-	*suite.Action
+    *suite.Action
 }
 
 func Test_ActionSuite(t *testing.T) {
-	action, err := suite.NewActionWithFixtures(App(), packr.New("my box", "../fixtures"))
-	if err != nil {
-		t.Fatal(err)
-	}
+    action, err := suite.NewActionWithFixtures(App(), os.DirFS("../fixtures"))
+    if err != nil {
+        t.Fatal(err)
+    }
 
-	as := &ActionSuite{
-		Action: action,
-	}
-	suite.Run(t, as)
+    as := &ActionSuite{
+        Action: action,
+    }
+    suite.Run(t, as)
 }
 ```
 
@@ -198,11 +198,11 @@ The `*.toml` files all get run through [https://github.com/gobuffalo/plush](http
 
 We've also add a couple of useful helpers for you as well:
 
-* `uuid()` - returns a new `github.com/gobuffalo/uuid.UUID`
-* `now()` - returns `time.Now()`
-* `nowAdd(s)` and `nowSub(s)` - similar to `now()` but `s` amount of seconds is added or substracted, respectively, from the return value
-* `uuidNamed(name)` - will attempt to return a previously declared UUID with that name, useful, for relations/associations. If there was one that wasn't defined with that name, a new one will be created.
-* `hash(string, opts)` - will create the hashed value of the string (useful for creating a password), you can define the cost as an opts (the default is `bcrypt.DefaultCost`)
+- `uuid()` - returns a new `github.com/gobuffalo/uuid.UUID`
+- `now()` - returns `time.Now()`
+- `nowAdd(s)` and `nowSub(s)` - similar to `now()` but `s` amount of seconds is added or substracted, respectively, from the return value
+- `uuidNamed(name)` - will attempt to return a previously declared UUID with that name, useful, for relations/associations. If there was one that wasn't defined with that name, a new one will be created.
+- `hash(string, opts)` - will create the hashed value of the string (useful for creating a password), you can define the cost as an opts (the default is `bcrypt.DefaultCost`)
 
 ### Using in Tests
 
@@ -210,19 +210,19 @@ In your suite tests you need to call the `LoadFixture` method giving it the name
 
 ```go
 func (as *ActionSuite) Test_WidgetsResource_List() {
-	as.LoadFixture("lots of widgets")
-	res := as.HTML("/widgets").Get()
+    as.LoadFixture("lots of widgets")
+    res := as.HTML("/widgets").Get()
 
-	body := res.Body.String()
-	as.Contains(body, "widget #1")
-	as.Contains(body, "widget #2")
+    body := res.Body.String()
+    as.Contains(body, "widget #1")
+    as.Contains(body, "widget #2")
 }
 ```
 
 ### FAQs
 
-* _Can I call `LoadFixture` more than once in a test?_ - Absolutely! Call it as many times as you want!
-* _Can I load multiple rows into a table in one scenario?_ - Absolutely!
-* _Can I load data into multiple tables in one scenario?_ - Absolutely!
-* _Will it load all my fixtures?_ - No, you have to load specific scenarios, so don't be afraid to create lots of scenarios and only call the ones you need per test.
-* _Will this polute my database, and how do I clear data between tests?_ - No need to worry, the suite will truncate any data in your database between test runs, so you never have to worry about it.
+- _Can I call `LoadFixture` more than once in a test?_ - Absolutely! Call it as many times as you want!
+- _Can I load multiple rows into a table in one scenario?_ - Absolutely!
+- _Can I load data into multiple tables in one scenario?_ - Absolutely!
+- _Will it load all my fixtures?_ - No, you have to load specific scenarios, so don't be afraid to create lots of scenarios and only call the ones you need per test.
+- _Will this pollute my database, and how do I clear data between tests?_ - No need to worry, the suite will truncate any data in your database between test runs, so you never have to worry about it.

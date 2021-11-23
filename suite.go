@@ -1,6 +1,7 @@
 package suite
 
 import (
+	"io/fs"
 	"testing"
 
 	"github.com/gobuffalo/buffalo"
@@ -69,8 +70,8 @@ func NewAction(app *buffalo.App) *Action {
 }
 
 // NewActionWithFixtures creates a new ActionSuite with passed box for fixtures.
-func NewActionWithFixtures(app *buffalo.App, box Box) (*Action, error) {
-	m, err := NewModelWithFixtures(box)
+func NewActionWithFixtures(app *buffalo.App, fsys fs.FS) (*Action, error) {
+	m, err := NewModelWithFixtures(fsys)
 	if err != nil {
 		return nil, err
 	}

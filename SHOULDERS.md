@@ -4,7 +4,6 @@ github.com/gobuffalo/suite does not try to reinvent the wheel! Instead, it uses 
 
 Thank you to the following **GIANTS**:
 
-
 * [cloud.google.com/go](https://godoc.org/cloud.google.com/go)
 
 * [dmitri.shuralyov.com/app/changes](https://godoc.org/dmitri.shuralyov.com/app/changes)

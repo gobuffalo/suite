@@ -1,21 +1,15 @@
 package fix
 
 import (
-	"io/ioutil"
+	"io"
 	"time"
 
-	"github.com/gobuffalo/packd"
 	"github.com/gobuffalo/plush/v4"
 	"github.com/gofrs/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func renderWithContext(file packd.File, ctx *plush.Context) (string, error) {
-	b, err := ioutil.ReadAll(file)
-	if err != nil {
-		return "", err
-	}
-
+func renderWithContext(r io.Reader, ctx *plush.Context) (string, error) {
 	cm := map[string]interface{}{
 		"uuid": func() uuid.UUID {
 			u, _ := uuid.NewV4()
@@ -32,16 +26,11 @@ func renderWithContext(file packd.File, ctx *plush.Context) (string, error) {
 			ctx.Set(k, v)
 		}
 	}
-	return plush.Render(string(b), ctx)
+	return plush.RenderR(r, ctx)
 }
 
-func render(file packd.File) (string, error) {
-	b, err := ioutil.ReadAll(file)
-	if err != nil {
-		return "", err
-	}
-
-	return plush.Render(string(b), plush.NewContextWith(map[string]interface{}{
+func render(r io.Reader) (string, error) {
+	ctx := plush.NewContextWith(map[string]interface{}{
 		"uuid": func() uuid.UUID {
 			u, _ := uuid.NewV4()
 			return u
@@ -51,7 +40,9 @@ func render(file packd.File) (string, error) {
 		"hash":      hash,
 		"nowAdd":    nowAdd,
 		"nowSub":    nowSub,
-	}))
+	})
+
+	return renderWithContext(r, ctx)
 }
 
 func hash(s string, opts map[string]interface{}, help plush.HelperContext) (string, error) {
