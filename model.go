@@ -7,7 +7,7 @@ import (
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/plush/v4"
-	"github.com/gobuffalo/pop/v5"
+	"github.com/gobuffalo/pop/v6"
 	"github.com/gobuffalo/suite/v4/fix"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
