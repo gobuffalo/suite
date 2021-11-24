@@ -12,7 +12,6 @@ require (
 	github.com/gobuffalo/pop/v6 v6.0.0
 	github.com/gofrs/uuid v4.1.0+incompatible
 	github.com/gorilla/sessions v1.2.1
-	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
 )
