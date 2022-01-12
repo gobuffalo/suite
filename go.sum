@@ -169,8 +169,8 @@ github.com/gobuffalo/buffalo v0.14.9/go.mod h1:M8XWw+Rcotn7C4NYpCEGBg3yX+O1TeD1p
 github.com/gobuffalo/buffalo v0.14.10/go.mod h1:49A7/JYlsCyTkVHtvKl91w6rG35ZiywwjWMVC1zKWsQ=
 github.com/gobuffalo/buffalo v0.14.11/go.mod h1:RO5OwOJQjv6/TukzszV5ELA54lg84D1kZwla6oAkTlo=
 github.com/gobuffalo/buffalo v0.15.4/go.mod h1:KAEep39iQPGw18Wa71KKkDCCKdMlEwZ+21tab42MFLY=
-github.com/gobuffalo/buffalo v0.18.0 h1:Xz9rpgUv02rVvSNOyYQBAVQpl9TD3Sg9JG2kvMhRxek=
-github.com/gobuffalo/buffalo v0.18.0/go.mod h1:fb4LkUNKu2Apo6qyuRFJoEj6iWBCDLYC+Z1FJ6AAzrs=
+github.com/gobuffalo/buffalo v0.18.2 h1:WwJVWLtoQd8zEmdS1D3Tc7yXIVYjRMnPpw0CDYG09eQ=
+github.com/gobuffalo/buffalo v0.18.2/go.mod h1:fb4LkUNKu2Apo6qyuRFJoEj6iWBCDLYC+Z1FJ6AAzrs=
 github.com/gobuffalo/buffalo-docker v1.0.5/go.mod h1:NZ3+21WIdqOUlOlM2onCt7cwojYp4Qwlsngoolw8zlE=
 github.com/gobuffalo/buffalo-docker v1.0.6/go.mod h1:UlqKHJD8CQvyIb+pFq+m/JQW2w2mXuhxsaKaTj1X1XI=
 github.com/gobuffalo/buffalo-docker v1.0.7/go.mod h1:BdB8AhcmjwR6Lo3rDPMzyh/+eNjYnZ1TAO0eZeLkhig=
@@ -626,8 +626,9 @@ github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5x
 github.com/gofrs/uuid v3.1.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gofrs/uuid v3.2.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gofrs/uuid v4.0.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
-github.com/gofrs/uuid v4.1.0+incompatible h1:sIa2eCvUTwgjbqXrPLfNwUf9S3i3mpH1O1atV+iL/Wk=
 github.com/gofrs/uuid v4.1.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
+github.com/gofrs/uuid v4.2.0+incompatible h1:yyYWMnhkhrKwwr8gAOcOCYxOOscHgDS9yZgBrnJfGa0=
+github.com/gofrs/uuid v4.2.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=
 github.com/gogo/protobuf v1.2.1/go.mod h1:hp+jE20tsWTFYpLwKvXlhS1hjn+gTNwPg2I6zVXpSg4=
 github.com/gogo/protobuf v1.3.2/go.mod h1:P1XiOD3dCwIKUDQYPy72D8LYyHL2YPYrpS2s69NZV8Q=
