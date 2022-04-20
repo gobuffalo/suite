@@ -46,7 +46,6 @@ dmitri.shuralyov.com/state v0.0.0-20180228185332-28bcc343414c/go.mod h1:0PRwlb0D
 git.apache.org/thrift.git v0.0.0-20180902110319-2566ecd5d999/go.mod h1:fPE2ZNJGynbRyZ4dJvy6G277gSllfV2HJqblrnkyeyg=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/toml v0.4.1/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
-github.com/BurntSushi/toml v1.0.0/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
 github.com/BurntSushi/toml v1.1.0 h1:ksErzDEI1khOiGPgpwuI7x2ebx/uXQNw7xJpn9Eq1+I=
 github.com/BurntSushi/toml v1.1.0/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
@@ -172,8 +171,8 @@ github.com/gobuffalo/buffalo v0.14.9/go.mod h1:M8XWw+Rcotn7C4NYpCEGBg3yX+O1TeD1p
 github.com/gobuffalo/buffalo v0.14.10/go.mod h1:49A7/JYlsCyTkVHtvKl91w6rG35ZiywwjWMVC1zKWsQ=
 github.com/gobuffalo/buffalo v0.14.11/go.mod h1:RO5OwOJQjv6/TukzszV5ELA54lg84D1kZwla6oAkTlo=
 github.com/gobuffalo/buffalo v0.15.4/go.mod h1:KAEep39iQPGw18Wa71KKkDCCKdMlEwZ+21tab42MFLY=
-github.com/gobuffalo/buffalo v0.18.5 h1:lL6UsnyfytIYF0NGJ25Ckjh7CynUihocmiBI2XCcqq8=
-github.com/gobuffalo/buffalo v0.18.5/go.mod h1:kb1lr/iWhuhty3qblzw6FGxh4bVqpCoxeBfBu8OrCbc=
+github.com/gobuffalo/buffalo v0.18.6 h1:a8gkePu8nwba1yAjpoNgwfbyhLk5SC+2ELL0YAMl2Mo=
+github.com/gobuffalo/buffalo v0.18.6/go.mod h1:ik4LJwMXlEmxE3yKeuF1wszLXPl01xCST5cWrRGNtTs=
 github.com/gobuffalo/buffalo-docker v1.0.5/go.mod h1:NZ3+21WIdqOUlOlM2onCt7cwojYp4Qwlsngoolw8zlE=
 github.com/gobuffalo/buffalo-docker v1.0.6/go.mod h1:UlqKHJD8CQvyIb+pFq+m/JQW2w2mXuhxsaKaTj1X1XI=
 github.com/gobuffalo/buffalo-docker v1.0.7/go.mod h1:BdB8AhcmjwR6Lo3rDPMzyh/+eNjYnZ1TAO0eZeLkhig=
@@ -572,7 +571,6 @@ github.com/gobuffalo/pop v4.12.2+incompatible/go.mod h1:DwBz3SD5SsHpTZiTubcsFWcV
 github.com/gobuffalo/pop v4.13.1+incompatible h1:AhbqPxNOBN/DBb2DBaiBqzOXIBQXxEYzngHHJ+ytP4g=
 github.com/gobuffalo/pop v4.13.1+incompatible/go.mod h1:DwBz3SD5SsHpTZiTubcsFWcVDpJWGsxjVjMPnkiThWg=
 github.com/gobuffalo/pop/v6 v6.0.0/go.mod h1:5rd3OnViLhjteR8+0i/mT9Q4CzkTzCoR7tm/9mmAic4=
-github.com/gobuffalo/pop/v6 v6.0.1/go.mod h1:5NO7ehmyRjRctnbMDhIqKkkg6zvdueufYltxErfp9BU=
 github.com/gobuffalo/pop/v6 v6.0.2 h1:NuIMTwZ54aHK92ertwv3R2SepAvhTRlQj9/MLqO9Qdo=
 github.com/gobuffalo/pop/v6 v6.0.2/go.mod h1:1g+AV0EDe0rUoy1I3yA3aa9N5+/uC5RxtGbxI0KNe4c=
 github.com/gobuffalo/release v1.0.35/go.mod h1:VtHFAKs61vO3wboCec5xr9JPTjYyWYcvaM3lclkc4x4=
