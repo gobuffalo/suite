@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/BurntSushi/toml v1.2.0
 	github.com/gobuffalo/buffalo v1.0.0
-	github.com/gobuffalo/envy v1.10.1
+	github.com/gobuffalo/envy v1.10.2
 	github.com/gobuffalo/httptest v1.5.1
 	github.com/gobuffalo/mw-csrf v1.0.1
 	github.com/gobuffalo/plush/v4 v4.1.14
