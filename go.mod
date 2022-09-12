@@ -10,7 +10,7 @@ require (
 	github.com/gobuffalo/mw-csrf v1.0.1
 	github.com/gobuffalo/plush/v4 v4.1.14
 	github.com/gobuffalo/pop/v6 v6.0.6
-	github.com/gofrs/uuid v4.2.0+incompatible
+	github.com/gofrs/uuid v4.3.0+incompatible
 	github.com/gorilla/sessions v1.2.1
 	github.com/stretchr/testify v1.8.0
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d
