@@ -6,7 +6,7 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/httptest"
-	csrf "github.com/gobuffalo/mw-csrf"
+	"github.com/gobuffalo/middleware/csrf"
 	"github.com/stretchr/testify/suite"
 )
 
