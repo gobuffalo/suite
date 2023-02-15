@@ -1,4 +1,4 @@
 package suite
 
 // Version of Suite
-const Version = "v4.0.3"
+const Version = "v4.0.4"

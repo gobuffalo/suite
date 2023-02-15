@@ -7,7 +7,7 @@ require (
 	github.com/gobuffalo/buffalo v1.1.0
 	github.com/gobuffalo/envy v1.10.2
 	github.com/gobuffalo/httptest v1.5.2
-	github.com/gobuffalo/mw-csrf v1.0.2
+	github.com/gobuffalo/middleware v1.0.0
 	github.com/gobuffalo/plush/v4 v4.1.18
 	github.com/gobuffalo/pop/v6 v6.1.1
 	github.com/gofrs/uuid v4.3.1+incompatible

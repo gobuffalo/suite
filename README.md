@@ -1,7 +1,7 @@
-
 # Suite
 
-![Tests](https://github.com/gobuffalo/suite/workflows/Tests/badge.svg)
+[![Standard Test](https://github.com/gobuffalo/suite/actions/workflows/standard-go-test.yml/badge.svg)](https://github.com/gobuffalo/suite/actions/workflows/standard-go-test.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/gobuffalo/suite/v4.svg)](https://pkg.go.dev/github.com/gobuffalo/suite/v4)
 
 Suite is a package meant to make testing [gobuffalo.io](http://gobuffalo.io) applications easier.
 
