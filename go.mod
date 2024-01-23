@@ -13,5 +13,5 @@ require (
 	github.com/gofrs/uuid v4.3.1+incompatible
 	github.com/gorilla/sessions v1.2.1
 	github.com/stretchr/testify v1.8.1
-	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa
+	golang.org/x/crypto v0.17.0
 )
